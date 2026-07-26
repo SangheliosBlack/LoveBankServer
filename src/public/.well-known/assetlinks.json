@@ -1,0 +1,36 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.arcacontal.tuali.development",
+    "sha256_cert_fingerprints":
+      ["B9:AD:E9:8E:78:6C:60:00:82:CC:35:80:CA:C7:B3:BE:01:7F:F6:FD:C6:04:A4:F3:5C:E7:63:17:5B:E1:3A:93"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.arcacontal.tuali.quality",
+    "sha256_cert_fingerprints":
+      ["B9:AD:E9:8E:78:6C:60:00:82:CC:35:80:CA:C7:B3:BE:01:7F:F6:FD:C6:04:A4:F3:5C:E7:63:17:5B:E1:3A:93"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.arcacontal.tuali.staging",
+    "sha256_cert_fingerprints":
+      ["B9:AD:E9:8E:78:6C:60:00:82:CC:35:80:CA:C7:B3:BE:01:7F:F6:FD:C6:04:A4:F3:5C:E7:63:17:5B:E1:3A:93"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.arcacontal.tuali",
+    "sha256_cert_fingerprints":
+      ["B9:AD:E9:8E:78:6C:60:00:82:CC:35:80:CA:C7:B3:BE:01:7F:F6:FD:C6:04:A4:F3:5C:E7:63:17:5B:E1:3A:93"]
+  }
+}]
