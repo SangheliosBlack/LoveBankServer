@@ -60,11 +60,11 @@ const AuthController = {
       return res.status(201).json(
         RequestUtil.prepareResponse(
           201,
+          `Usuario creado con éxito`,
           {
             user,
             accessToken
-          },
-          `Usuario creado con éxito`
+          }
         )
       );
 
