@@ -1,6 +1,4 @@
 import expressWinston from 'express-winston';
-import swaggerUi from'swagger-ui-express';
-import swaggerJsdoc from'swagger-jsdoc';
 import compression from  'compression';
 import path, { dirname } from 'path';
 import bodyParser from 'body-parser';
@@ -57,11 +55,8 @@ class Server {
       this.setupSecurity();
       this.setupCors();
 
-      this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions)));
-
       this.app.get('/api-docs.json',(req,res)=>{
         res.setHeader('Content-Type','application/json');
-        res.send(swaggerJsdoc(swaggerOptions.options));
       });
 
       this.app.use(express.static(path.join(__dirname, 'src', 'public')));

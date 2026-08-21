@@ -1,10 +1,8 @@
 
 import catchAsync from "../utils/catchAsync.js";
 import RequestUtil from '../utils/requestUtils.js';
-import AzureDocumentIntelligenceUtils from '../utils/azureDocumentIntelligenceUtils.js';
 
 import UploadService from "../services/azureUploadService.js";
-import DocumentService from "../services/azureDocumentIntelligence.js";
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -35,17 +33,12 @@ var UploadController = {
 
         const response = JSON.parse(data)['analysis']['documents'][0]['fields'];
 
-        const fiscalFolio = AzureDocumentIntelligenceUtils.extractFolioFiscalFromContent(JSON.parse(data)['analysis']['content']);
-
         response.FiscalFolio = {
           "kind": "string",
           "value": fiscalFolio,
           "content": fiscalFolio,
           "confidence": 0.99
         };
-
-
-        AzureDocumentIntelligenceUtils.removeBoundingRegions(response);
 
         res.status(200).json(
           RequestUtil.prepareResponse(200, "Invoice uploaded and analyzed successfully",response)

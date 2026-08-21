@@ -1,33 +1,56 @@
-import admin from 'firebase-admin';
+import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { getMessaging } from 'firebase-admin/messaging';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 class NotificationService {
   constructor() {
+    this.firebaseEnabled = false;
     this.initFirebase();
   }
 
-  initFirebase() {
-    if (admin.apps.length === 0) {
-      const serviceAccountPath = path.join(
-        process.cwd(),
-        'keys/flutter-template-b03c3-firebase_admin_sdk.json'
-      );
+  getServiceAccount() {
+    const serviceAccountPath = path.join(
+      process.cwd(),
+      'keys/flutter-template-b03c3-firebase_admin_sdk.json'
+    );
 
+    if (process.env.FIREBASE_KEY_B64) {
       const decoded = Buffer.from(process.env.FIREBASE_KEY_B64, 'base64').toString('utf-8');
-      
-      const serviceAccount = JSON.parse(decoded);
+      return JSON.parse(decoded);
+    }
 
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
+    if (fs.existsSync(serviceAccountPath)) {
+      const rawFile = fs.readFileSync(serviceAccountPath, 'utf-8');
+      return JSON.parse(rawFile);
+    }
+
+    return null;
+  }
+
+  initFirebase() {
+    try {
+      if (getApps().length > 0) {
+        this.firebaseEnabled = true;
+        return;
+      }
+
+      const serviceAccount = this.getServiceAccount();
+
+      if (!serviceAccount) {
+        console.warn('Firebase Admin disabled: credentials not found (FIREBASE_KEY_B64 or keys JSON file).');
+        return;
+      }
+
+      initializeApp({
+        credential: cert(serviceAccount),
       });
 
-      console.log('✅ Firebase Admin Initialized');
+      this.firebaseEnabled = true;
+      console.log('Firebase Admin Initialized');
+    } catch (error) {
+      this.firebaseEnabled = false;
+      console.error('Firebase Admin init failed. Push notifications disabled:', error.message);
     }
   }
 
@@ -58,17 +81,22 @@ class NotificationService {
 
   async sendMessage(message) {
 
+    if (!this.firebaseEnabled) {
+      console.warn('Push notification skipped: Firebase Admin is disabled.');
+      return null;
+    }
+
     try {
 
-      const response = await admin.messaging().send(message);
+      const response = await getMessaging().send(message);
 
-      console.log('✅ Message sent:', response);
+      console.log('Message sent:', response);
 
       return response;
 
     } catch (error) {
 
-      console.error('❌ Error sending message:', error);
+      console.error('Error sending message:', error);
 
       throw error;
 
