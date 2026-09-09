@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00013] - [09/SEP/2025] @JULIO VILLAGRANA
+- Added transaction feature support
+
 ### [00012] - [31/MAY/2025] @JULIO VILLAGRANA
 - Add FCM Admin service
 

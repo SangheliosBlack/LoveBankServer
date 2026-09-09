@@ -17,5 +17,8 @@ export default async function loadRoutes(app, routes) {
 
   const loveRoutes = await import('./routes/love_routes.js');
   app.use(routes.love, loveRoutes.default);
+  
+  const transactionRoutes = await import('./routes/transactions.js');
+  app.use(routes.transactions, transactionRoutes.default);
 
 }
