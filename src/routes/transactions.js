@@ -21,6 +21,8 @@ router.get("/:id", checkPermissions('read', 'all'), validateMongoId, Transaction
 router.patch("/:id", checkPermissions('read', 'all'), validateMongoId, validateSchema(validator.transactionUpdateSchema), TransactionController.update);
 
 router.delete("/:id", checkPermissions('read', 'all'), validateMongoId, TransactionController.delete);
+
+router.patch("/:id/confirm", checkPermissions('read', 'all'), validateMongoId, TransactionController.confirmTransaction);
     
 export default router;
     

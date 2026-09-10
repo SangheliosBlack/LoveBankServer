@@ -31,6 +31,10 @@ const Transaction_Catalog_Schema = Schema({
     type: Schema.Types.ObjectId,
     ref: "love_catalog",
     required: true
+  },
+  confirmed:{
+    type: Boolean,
+    default: false
   }
 }, {
     timestamps: true

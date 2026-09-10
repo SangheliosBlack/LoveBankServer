@@ -1,5 +1,13 @@
 ## Changelog
 
+### [00014] - [09/SEP/2025] @JULIO VILLAGRANA
+
+- Implemented `confirmTransaction` method in TransactionController to handle transaction confirmation.
+- Updated transaction schema to include `confirmed` field.
+- Added new route for confirming transactions.
+- Enhanced response utility to include status codes for various scenarios.
+- Updated package.json scripts for better environment handling.
+
 ### [00013] - [09/SEP/2025] @JULIO VILLAGRANA
 - Added transaction feature support
 

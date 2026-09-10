@@ -5,8 +5,9 @@
   "description": "Server Template NodeJs",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "production": "NODE_ENV=production node index.js",
+    "start": "npm run production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Julio Villagrana Martinez",
@@ -42,5 +43,8 @@
     "socket.io": "^4.7.5",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

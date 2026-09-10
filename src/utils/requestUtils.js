@@ -29,17 +29,20 @@ const RequestUtil = {
       doc: { data: { count: 0, rows: [] } },
     };
   },
-  prepareResponse(statusCode, message, data,links) {
+  prepareResponse(statusCode, message, data, links) {
 
     const statusTextMap = {
       200: 'SUCCESS',
       201: 'CREATED',
+      204: 'NO_CONTENT',
+      400: 'BAD_REQUEST',
+      401: 'UNAUTHORIZED',
       400: 'BAD_REQUEST',
       404: 'NOT_FOUND',
       500: 'ERROR'
     };
 
-    return {
+    const response = {
       status: statusTextMap[statusCode] || 'UNKNOWN',
       statusCode: statusCode,
       message: message,
@@ -47,10 +50,18 @@ const RequestUtil = {
         "version": "1.0.0",
         "language": "es"
       },
-      links: links,
       timestamp: new Date(),
-      data: data,
     };
+
+    if (this.validParam(links)) {
+      response.links = links;
+    }
+
+    if (this.validParam(data)) {
+      response.data = data;
+    }
+
+    return response;
   },
   validParam(param) {
     return param !== undefined && param !== null;
