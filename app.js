@@ -80,6 +80,15 @@ class Server {
         }
       });
 
+      this.app.get('/', (_req, res) => {
+        res.status(200).json({
+          status: 'ok',
+          service: 'LoveBankServer',
+          environment: process.env.NODE_ENV,
+          health: '/healthz',
+        });
+      });
+
       this.app.use(requestLogger);
       this.app.use(responseHandler);
       this.setupStructuredLogging();  // Nuevo logging estructurado
