@@ -6,7 +6,6 @@ export default {
   auth:          buildPath(apiVersion,'/auth'),
   users:         buildPath(apiVersion,'/user'),
   sms:           buildPath(apiVersion,'/sms'),
-  upload:        buildPath(apiVersion,'/upload'),
   notifications: buildPath(apiVersion,'/notifications'),
   love:          buildPath(apiVersion,'/loveCatalog'),
   transactions:  buildPath(apiVersion,'/transactions')
