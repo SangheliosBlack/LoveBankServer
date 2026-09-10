@@ -20,7 +20,14 @@ router.post('/createUser',[
 
 router.post('/login',[
     check('password',ERROR_MESSAGES.CONTRASENA_NO_COINCIDE).not().isEmpty(),
-    check('email',ERROR_MESSAGES.CORREO_NO_VALIDO).isEmail(),
+    check('email').optional().trim(),
+    check('phone').optional().trim(),
+    check().custom((_, { req }) => {
+        if (!req.body.email && !req.body.phone) {
+            throw new Error(ERROR_MESSAGES.CORREO_NO_VALIDO);
+        }
+        return true;
+    }),
     validarCampos
 ],AuthController.login);
 

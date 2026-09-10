@@ -58,12 +58,18 @@ passport.use(
   'login',
   new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'identifier',
       passwordField: 'password',
     },
-    async (email, password, done) => {
+    async (identifier, password, done) => {
       try {
-        const user = await User.findOne({email:email});
+        const normalizedIdentifier = identifier.trim();
+        const user = await User.findOne({
+          $or: [
+            { email: normalizedIdentifier.toLowerCase() },
+            { phone: normalizedIdentifier },
+          ],
+        });
 
         if (!user) {
           return done(null, false, {

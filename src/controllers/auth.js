@@ -85,6 +85,9 @@ const AuthController = {
   }),
   login: catchAsync(async (req, res,next) => {
 
+    // Passport recibe un único identificador, que puede ser email o teléfono.
+    req.body.identifier = req.body.email || req.body.phone;
+
     passport.authenticate(
       'login',
       { session: false },
