@@ -40,6 +40,11 @@ const User_Schema = Schema({
       type:String,
       required: false,
       default: ""
+    },
+    imageUrl:{
+      type:String,
+      required: false,
+      default: ""
     }
 }, {
     timestamps: true
