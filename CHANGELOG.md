@@ -18,7 +18,6 @@
 - Add Refresh Token funcionality
 
 ### [00010] - [18/FEB/2025] @Julio Villagrana
-- Add upload files to azure blob @azure/storage-blob
 
 ### [00009] - [31/ENE/2025] @Julio Villagrana
 - Catch web hook Labs Mobile logs error
