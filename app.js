@@ -94,7 +94,7 @@ class Server {
       this.app.use(bodyParser.json(),trim_json_values);
       this.app.use(compression());
 
-      if (process.env.NODE_ENV !== 'p') {
+      if (process.env.NODE_ENV !== 'production') {
         this.app.use(morgan('dev'));
       }
 
