@@ -49,7 +49,7 @@ const TransactionController = {
       .select("sender receiver description confirmed quantity docType createdAt")
       .populate("sender", "full_name email")
       .populate("receiver", "full_name email")
-      .populate("docType", "name description icon");
+      .populate("docType", "name description iconIndex ");
 
     const transactions = Transactions.toJSONListForUser(listLove, userId);
 
@@ -81,7 +81,7 @@ const TransactionController = {
       .select("sender receiver description confirmed quantity docType createdAt")
       .populate("sender", "full_name email")
       .populate("receiver", "full_name email")
-      .populate("docType", "name description icon");
+      .populate("docType", "name description iconIndex");
 
     const [transaction] = Transactions.toJSONListForUser([createdLove], userId);
 
