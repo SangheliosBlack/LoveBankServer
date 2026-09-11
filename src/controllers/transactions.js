@@ -47,6 +47,7 @@ const TransactionController = {
       $or: [{ sender: userId }, { receiver: userId }]
     })
       .select("sender receiver description confirmed quantity docType createdAt")
+      .sort({ createdAt: -1 })
       .populate("sender", "full_name email")
       .populate("receiver", "full_name email")
       .populate("docType", "name description iconIndex ");
