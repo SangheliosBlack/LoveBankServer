@@ -9,6 +9,7 @@ const Love_Catalog_Schema = Schema({
   iconIndex: {
     type: Number,
     required: true,
+    default: 0
   },
   description: {
       type: String,
